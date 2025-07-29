@@ -110,7 +110,7 @@ You need not measure the time for every possible array size; you may wish to mea
 
 **Caveat 2**: If your sort function mutates the input array, ensure that you pass a copy of the original array so that the array size does not shrink or grow between runs. You can pass a copy of a list using `list.copy()` (note that this is an O(n) operation).
 
-**Caveat:** Remember for each array size to run the function a few times and get the average time. `timeit` returns the total execution time for `n` runs.
+**Caveat 3:** Remember for each array size to run the function a few times and get the average time. `timeit` returns the total execution time for `n` runs.
 
 
 # Part 3: Performance of Data Structures
