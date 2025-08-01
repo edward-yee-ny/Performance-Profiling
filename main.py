@@ -63,25 +63,17 @@ def merge(left, right):
     Merge!
     """
     merged_list = []
-    leftidx = 0
-    rightidx = 0
-    for i in range(len(left) + len(right)):
-        if (not( leftidx == len(left))) and (not (rightidx == len(right))):
-            if left[leftidx] < right[rightidx]:
-                merged_list.append(left[leftidx])
-                leftidx += 1
-            else:
-                merged_list.append(right[rightidx])
-                rightidx += 1
+    while len(left) > 0 and len(right) > 0:
+        if left[0] < right[0]:
+            merged_list.append(left.pop(0))
         else:
-            merged_list += right[rightidx:]
-            merged_list += left[leftidx:]
-    return merged_list
+            merged_list.append(right.pop(0))
+
+    return merged_list + left + right
 
 def merge_sort(data):
     if len(data) <= 1:
         return data
-
     # Split the array into two halves
     mid = len(data) // 2
     left_half = merge_sort(data[:mid])
@@ -90,15 +82,22 @@ def merge_sort(data):
     # Merge the sorted halves
     return merge(left_half, right_half)
 
+def quicksort(data):
+    if len(data) <= 1:
+        return data
+    less = []
+    more = []
+    pivot = data.pop()
+    for i in data:
+        if i <= pivot:
+            less.append(i)
+        else:
+            more.append(i)
+    left = quicksort(less)
+    right = quicksort(more)
+    return left + [pivot] + right
 
-def callmerge():
-    data = list(range(length))
-    random.shuffle(data)
-    merge_sort(data)
-    return data
-
-
-
+def binary_search()
 # ####bubblesort####
 # print("bubble sort")
 # bblsort = []
@@ -117,10 +116,25 @@ def callmerge():
 #     print(insert_sort[i])
 
 ###merge sort###
+# length = 10
+# print("merge sort")
+# merg_sort = []
+# # print(merge_sort([5, 7, 3]))
+# for i in range(7):
+#     length *= 5
+#     data = list(range(length))
+#     random.shuffle(data)
+#     merg_sort.append([timeit.timeit(lambda: merge_sort(data), number = n),length])
+#     print(merg_sort[i])
+
+##quick sort###
 length = 10
-print("merge sort")
-merg_sort = []
+print("quick sort")
+quic_sort = []
+# print(merge_sort([5, 7, 3]))
 for i in range(7):
-    length *= 3
-    merg_sort.append([timeit.timeit(callmerge(), number = n), length])
-    print(merg_sort[i])
+    length *= 5
+    data = list(range(length))
+    random.shuffle(data)
+    quic_sort.append([timeit.timeit(lambda: quicksort(data), number = n),length])
+    print(quic_sort[i])
